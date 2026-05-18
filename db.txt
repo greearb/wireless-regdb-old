@@ -145,43 +145,43 @@ country AT: DFS-ETSI
 
 # Source:
 # 'Item' in the comments below refers to each numbered rule found at:
-# https://www.legislation.gov.au/Details/F2023C00524
+# https://www.legislation.gov.au/Details/F2025L01047 within Table 8
+# except for 5850-5875 which is found in Table 1.
 # Both DFS-ETSI and DFS-FCC are acceptable per AS/NZS 4268 Appendix B.
 # The EIRP for DFS bands can be increased by 3dB if TPC is implemented.
 # In order to allow 80MHz operation between 5650-5730MHz the upper boundary
 # of this more restrictive band has been shifted up by 5MHz from 5725MHz.
 country AU: DFS-ETSI
-	# Item 58
-	(915 - 920 @ 4), (1000 mW)
-	(920 - 928 @ 8), (1000 mW)
+	# Item 1
+	(915 - 928 @ 8), (1000 mW)
 
-	# Item 59
+	# Item 3 and 7
 	(2400 - 2483.5 @ 40), (4000 mW)
 
-	# Item 61
+	# Item 10
 	(5150 - 5250 @ 80), (200 mW), NO-OUTDOOR, AUTO-BW
 
-	# Item 62 (200 mW allowed if TPC is used)
+	# Item 11 (200 mW allowed if TPC is used)
 	(5250 - 5350 @ 80), (100 mW), NO-OUTDOOR, AUTO-BW, DFS
 
-	# Item 63(a) (1000 mW with TPC)
+	# Item 12(a) (1000 mW with TPC)
 	(5470 - 5600 @ 80), (500 mW), DFS
 
-	# Item 63(b) (1000 mW with TPC)
+	# Item 12(b) (1000 mW with TPC)
 	# The end is 5725 but we borrow 5 MHz from the following less restrictive band
 	# so we can get an 80 MHz channel.
 	(5650 - 5730 @ 80), (500 mW), DFS
 
-	# Item 60
+	# Item 9
 	(5730 - 5850 @ 80), (4000 mW), AUTO-BW
 
-	# Item 22
+	# Item 22 of Table 1
 	(5850 - 5875 @ 20), (25 mW), AUTO-BW
 
-	# Item 63AA (25 mW if outdoors)
-	(5925 - 6425 @ 160), (250 mW), NO-OUTDOOR
+	# Item 13 (25 mW if outdoors)
+	(5925 - 6585 @ 320), (250 mW), NO-OUTDOOR
 
-	# Item 65
+	# Item 18
 	(57000 - 71000 @ 2160), (20000 mW), NO-OUTDOOR
 
 country AW: DFS-ETSI
@@ -388,15 +388,20 @@ country BZ: DFS-JP
 	(5735 - 5835 @ 80), (30)
 
 # Sources:
-# https://www.ic.gc.ca/eic/site/smt-gst.nsf/vwapj/rss-247-i2-e.pdf/$file/rss-247-i2-e.pdf
+# RSS-247 Issue 4
+# https://ised-isde.canada.ca/site/spectrum-management-telecommunications/en/devices-and-equipment/radio-equipment-standards/radio-standards-specifications-rss/rss-247-digital-transmission-systems-dtss-frequency-hopping-systems-fhss-and-licence-exempt-local
 # https://www.ic.gc.ca/eic/site/smt-gst.nsf/eng/sf11750.html (6 GHz operation)
 country CA: DFS-FCC
-	(2402 - 2472 @ 40), (30)
-	(5150 - 5250 @ 80), (23), NO-OUTDOOR, AUTO-BW
-	(5250 - 5350 @ 80), (24), DFS, AUTO-BW
-	(5470 - 5600 @ 80), (24), DFS
-	(5650 - 5730 @ 80), (24), DFS
-	(5735 - 5835 @ 80), (30)
+	(2400 - 2483.5 @ 40), (4000 mW)
+	(5150 - 5250 @ 80), (200 mW), NO-OUTDOOR, AUTO-BW
+	(5250 - 5350 @ 80), (500 mW), DFS, AUTO-BW
+	# This range ends at 5725 MHz, but channel 144 extends to 5730 MHz.
+	# Since 5725 ~ 5730 MHz belongs to the next range which has looser
+	# requirements, we can extend the range by 5 MHz to make the kernel
+	# happy and be able to use channel 144.
+	(5470 - 5730 @ 160), (500 mW), DFS
+	(5730 - 5850 @ 80), (4000 mW), AUTO-BW
+	(5850 - 5895 @ 40), (27), AUTO-BW
 	(5925 - 7125 @ 320), (12), NO-OUTDOOR
 
 # Source:
@@ -477,14 +482,17 @@ country CO: DFS-FCC
 
 # Source:
 # https://storage.googleapis.com/eleoscompliance1.appspot.com/public/PNAF%20modificaci%C3%B3n%20ALCA87_30_04_2021.pdf
+# https://pgrweb.go.cr/scij/Busqueda/Normativa/Normas/nrm_texto_completo.aspx?param1=NRTC&nValor1=1&nValor2=99551&nValor3=144158&strTipM=TC
 country CR: DFS-FCC
 	(2402 - 2482 @ 40), (36)
-	(5170 - 5250 @ 20), (30)
-	(5250 - 5330 @ 20), (30), DFS
-	(5490 - 5730 @ 20), (30), DFS
-	(5735 - 5835 @ 20), (36)
-	(5875 - 5925 @ 20), (30)
+	(5150 - 5250 @ 80), (30), AUTO-BW
+	(5250 - 5350 @ 80), (30), DFS, AUTO-BW
+	(5470 - 5730 @ 160), (30), DFS
+	(5730 - 5850 @ 80), (36), AUTO-BW
+	(5850 - 5895 @ 40), (36), AUTO-BW
+	(5895 - 5925 @ 20), (30), AUTO-BW
 	(5925 - 7125 @ 320), (30), NO-OUTDOOR
+	(57000 - 71000 @ 2160), (43)
 
 # Source:
 # https://www.mincom.gob.cu/es/marco-legal
@@ -723,6 +731,13 @@ country FM: DFS-FCC
 	(5490 - 5730 @ 160), (24), DFS
 	(5735 - 5835 @ 80), (30)
 
+country FO: DFS-ETSI
+	(2400 - 2483.5 @ 40), (100 mW)
+	(5150 - 5250 @ 80), (200 mW), NO-OUTDOOR, AUTO-BW
+	(5250 - 5350 @ 80), (100 mW), DFS, NO-OUTDOOR, AUTO-BW
+	(5470 - 5725 @ 160), (500 mW), DFS
+	(5945 - 6425 @ 320), (23), NO-OUTDOOR
+
 # FR as part of EU/CEPT accepted decisions 2005/513/EC (5GHz RLAN, EN 301 893)
 # and 2006/771/EC (amended by 2008/432/EC, Short-Range Devices, EN 300 440)
 #  EU decision 2005/513/EC: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02005D0513-20070213
@@ -793,6 +808,13 @@ country GH: DFS-FCC
 	(5490 - 5730 @ 160), (24), DFS
 	(5735 - 5835 @ 80), (30)
 
+country GI: DFS-ETSI
+	(2400 - 2483.5 @ 40), (100 mW)
+	(5150 - 5250 @ 80), (200 mW), NO-OUTDOOR, AUTO-BW
+	(5250 - 5350 @ 80), (100 mW), DFS, NO-OUTDOOR, AUTO-BW
+	(5470 - 5725 @ 160), (500 mW), DFS
+	(5945 - 6425 @ 320), (23), NO-OUTDOOR
+
 country GL: DFS-ETSI
 	(2402 - 2482 @ 40), (20)
 	(5170 - 5250 @ 80), (20), AUTO-BW, wmmrule=ETSI
@@ -861,7 +883,7 @@ country HK: DFS-ETSI
 	(5250 - 5350 @ 80), (23), DFS, AUTO-BW, NO-OUTDOOR
 	(5470 - 5730 @ 160), (27), DFS
 	(5730 - 5850 @ 80), (36)
-	(5925 - 6425 @ 160), (14)
+	(5945 - 6425 @ 160), (24), NO-OUTDOOR
 
 # Source:
 # https://www.conatel.gob.hn/doc/Regulacion/resoluciones/2023/NR05-23.pdf
@@ -968,6 +990,13 @@ country IL: DFS-ETSI
 	(5725 - 5875 @ 80), (25 mW), AUTO-BW
 	(5945 - 6425 @ 320), (200 mW), NO-OUTDOOR
 
+country IM: DFS-ETSI
+	(2400 - 2483.5 @ 40), (100 mW)
+	(5150 - 5250 @ 80), (200 mW), NO-OUTDOOR, AUTO-BW
+	(5250 - 5350 @ 80), (100 mW), DFS, NO-OUTDOOR, AUTO-BW
+	(5470 - 5725 @ 160), (500 mW), DFS
+	(5945 - 6425 @ 320), (23), NO-OUTDOOR
+
 # Source:
 # https://dot.gov.in/spectrummanagement/delicensing-24-24835-ghz-band-gsr-45-e-5150-5350-ghz-gsr-46-e-and-5725-5875-ghz
 # https://dot.gov.in/spectrummanagement/license-exemption-5-ghz-gsr-1048e-dated-22102018
@@ -977,6 +1006,7 @@ country IN:
 	(5250 - 5350 @ 80), (24), DFS
 	(5470 - 5725 @ 160), (24), DFS
 	(5725 - 5875 @ 80), (30)
+	(5925 - 6425 @ 320), (24), NO-OUTDOOR
 
 # Source:
 # https://asnad.cra.ir/fa/Public/Documents/Details/73af8590-f065-eb11-968f-0050569b0899
@@ -1105,8 +1135,9 @@ country KR: DFS-JP
 	(5250 - 5350 @ 80), (20), DFS, AUTO-BW
 	(5470 - 5725 @ 160), (20), DFS
 	(5725 - 5850 @ 80), (23)
-	# 6 GHz band
-	(5925 - 7125 @ 320), (15), NO-OUTDOOR
+	# 6 GHz band - per MSIT Notice 2026-10
+	(5925 - 6425 @ 320), (18), NO-OUTDOOR, AUTO-BW
+	(6425 - 7125 @ 320), (15), NO-OUTDOOR, AUTO-BW
 	# 60 GHz band channels 1-4
 	(57000 - 66000 @ 2160), (43)
 
@@ -1133,11 +1164,12 @@ country KY: DFS-FCC
 # http://adilet.zan.kz/rus/docs/V1500010730
 # http://adilet.zan.kz/rus/docs/V1500010375
 country KZ: DFS-ETSI
-	(2400 - 2483.5 @ 40), (20)
-	(5150 - 5250 @ 80), (23), NO-OUTDOOR, AUTO-BW
+	(2400 - 2483.5 @ 40), (100 mW)
+	(5150 - 5250 @ 80), (200 mW), NO-OUTDOOR, AUTO-BW
 	(5250 - 5350 @ 80), (20), NO-OUTDOOR, DFS, AUTO-BW
-	(5470 - 5725 @ 160), (20), NO-OUTDOOR, DFS
-	(5725 - 5850 @ 80), (20), NO-OUTDOOR
+	(5470 - 5725 @ 160), (100 mW), NO-OUTDOOR, DFS
+	(5725 - 5850 @ 80), (100 mW), NO-OUTDOOR
+	(5925 - 6425 @ 320), (200 mW), NO-OUTDOOR
 	(57000 - 66000 @ 2160), (40)
 
 country LB: DFS-FCC
@@ -1446,14 +1478,16 @@ country MX: DFS-FCC
 	(5925 - 6425 @ 320), (12), NO-OUTDOOR
 
 # Source:
-# https://www.mcmc.gov.my/skmmgovmy/media/General/CA-No-1-of-2022_-signed_19012022.pdf
+# https://www.mcmc.gov.my/skmmgovmy/media/General/pdf2/Class-Assignment-No-2-of-2025.pdf
 country MY: DFS-FCC
-	(2402 - 2482 @ 40), (500 mW)
-	(5170 - 5250 @ 80), (1000 mW), AUTO-BW
-	(5250 - 5330 @ 80), (1000 mW), DFS, AUTO-BW
-	(5490 - 5650 @ 160), (1000 mW), DFS
-	(5735 - 5835 @ 80), (1000 mW)
-	(5925 - 6425 @ 320), (200 mW), NO-OUTDOOR
+	(2400 - 2500 @ 40), (500 mW)
+	(5150 - 5250 @ 80), (1000 mW), AUTO-BW, NO-OUTDOOR
+	# 5250 - 5350 MHz regulatory limit is 1000 mW, but 200 mW reaches the PSD limit of 10 mW / MHz at 20 MHz channel width
+	(5250 - 5350 @ 80), (200 mW), DFS, AUTO-BW, NO-OUTDOOR
+	# 5470 - 5650 MHz regulatory limit is 1000 mW, but 200 mW reaches the PSD limit of 10 mW / MHz at 20 MHz channel width
+	(5470 - 5650 @ 160), (200 mW), DFS
+	(5725 - 5875 @ 80), (1000 mW)
+	(5925 - 6425 @ 320), (250 mW), NO-OUTDOOR
 
 # Source:
 # https://www.cran.na/yglilidy/2023/04/GG-8060-dated-3-April-2023.pdf
@@ -1645,7 +1679,6 @@ country PR: DFS-FCC
 	# Added 6e support. --Ben
 	(5925 - 7125 @ 320), (12), NO-OUTDOOR
 
-
 # PT as part of EU/CEPT accepted decisions 2005/513/EC (5GHz RLAN, EN 301 893)
 # and 2006/771/EC (amended by 2008/432/EC, Short-Range Devices, EN 300 440)
 #  EU decision 2005/513/EC: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02005D0513-20070213
@@ -1741,8 +1774,8 @@ country RS: DFS-ETSI
 country RU:
 	(2400 - 2483.5 @ 40), (100mW)
 	(5150 - 5350 @ 160), (100 mW), NO-OUTDOOR
-	(5650 - 5850 @ 160), (100 mW), NO-OUTDOOR
-	(5925 - 6425 @ 160), (100 mW), NO-OUTDOOR
+	(5650 - 5850 @ 160), (200 mW), NO-OUTDOOR
+	(5925 - 6425 @ 320), (200 mW), NO-OUTDOOR
 	# 60 GHz band channels 1-4, ref: Changes to NLA 124_Order №129_22042015.pdf
 	(57000 - 66000 @ 2160), (40), NO-OUTDOOR
 
@@ -1846,18 +1879,12 @@ country SK: DFS-ETSI
 	# 60 GHz band channels 1-4 (ETSI EN 302 567)
 	(57000 - 66000 @ 2160), (40)
 
-# Same as other EU, it seems. --Ben
 country SM: DFS-ETSI
 	(2400 - 2483.5 @ 40), (100 mW)
-	(5150 - 5250 @ 80), (200 mW), NO-OUTDOOR, AUTO-BW, wmmrule=ETSI
-	(5250 - 5350 @ 80), (100 mW), NO-OUTDOOR, DFS, AUTO-BW, wmmrule=ETSI
-	(5470 - 5725 @ 160), (500 mW), DFS, wmmrule=ETSI
-	# short range devices (ETSI EN 300 440-1)
-	(5725 - 5875 @ 80), (25 mW)
-	# 6 GHz band
-	(5945 - 6425 @ 160), (23), NO-OUTDOOR, wmmrule=ETSI
-	# 60 GHz band channels 1-4 (ETSI EN 302 567)
-	(57000 - 66000 @ 2160), (40)
+	(5150 - 5250 @ 80), (200 mW), NO-OUTDOOR, AUTO-BW
+	(5250 - 5350 @ 80), (100 mW), DFS, NO-OUTDOOR, AUTO-BW
+	(5470 - 5725 @ 160), (500 mW), DFS
+	(5945 - 6425 @ 320), (23), NO-OUTDOOR
 
 # Source:
 # Regulation N° 2004-005 ART/DG/DRC/D.Rég
@@ -1939,10 +1966,13 @@ country TH: DFS-FCC
 	(5735 - 5835 @ 80), (30)
 	(5925 - 6425 @ 320), (250 mW), NO-OUTDOOR
 
+# Source:
+# https://www.anf.tn/sites/default/files/2025-01/Arr%C3%AAt%C3%A92024_4611.pdf
 country TN: DFS-ETSI
 	(2402 - 2482 @ 40), (20)
 	(5170 - 5250 @ 80), (20), AUTO-BW
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
+	(5925 - 6425 @ 320), (200 mW), NO-OUTDOOR
 
 # Source:
 # Technical Criteria for Radio Devices and Systems Excluded from Frequency Allocation, Sept 9, 2022
@@ -2017,7 +2047,7 @@ country UA: DFS-ETSI
 	(5725 - 5850 @ 80), (100 mW), NO-OUTDOOR
 	(5945 - 6425 @ 320), (23), NO-OUTDOOR
 	# 60 GHz band channels 1-4, ref: Etsi En 302 567
-	(57000 - 66000 @ 2160), (40 mW), NO-OUTDOOR
+	(57000 - 66000 @ 2160), (40), NO-OUTDOOR
 
 country UG: DFS-FCC
 	(2402 - 2482 @ 40), (20)
@@ -2075,18 +2105,12 @@ country UZ: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 
-# Same as other EU, it seems. --Ben
 country VA: DFS-ETSI
 	(2400 - 2483.5 @ 40), (100 mW)
-	(5150 - 5250 @ 80), (200 mW), NO-OUTDOOR, AUTO-BW, wmmrule=ETSI
-	(5250 - 5350 @ 80), (100 mW), NO-OUTDOOR, DFS, AUTO-BW, wmmrule=ETSI
-	(5470 - 5725 @ 160), (500 mW), DFS, wmmrule=ETSI
-	# short range devices (ETSI EN 300 440-1)
-	(5725 - 5875 @ 80), (25 mW)
-	# 6 GHz band
-	(5945 - 6425 @ 160), (23), NO-OUTDOOR, wmmrule=ETSI
-	# 60 GHz band channels 1-4 (ETSI EN 302 567)
-	(57000 - 66000 @ 2160), (40)
+	(5150 - 5250 @ 80), (200 mW), NO-OUTDOOR, AUTO-BW
+	(5250 - 5350 @ 80), (100 mW), DFS, NO-OUTDOOR, AUTO-BW
+	(5470 - 5725 @ 160), (500 mW), DFS
+	(5945 - 6425 @ 320), (23), NO-OUTDOOR
 
 # Source:
 # http://www.ntrc.vc/regulations/Jun_2006_Spectrum_Managment_Regulations.pdf
@@ -2161,7 +2185,7 @@ country ZA: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (30)
-	(5925 - 6425 @ 320), (14)
+	(5925 - 6425 @ 320), (23), NO-OUTDOOR
 
 country ZW: DFS-ETSI
 	(2402 - 2482 @ 40), (20)
